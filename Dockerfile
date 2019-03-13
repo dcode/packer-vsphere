@@ -19,10 +19,10 @@ ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERS
 RUN echo "${PACKER_SHA256SUM} packer_${PACKER_VERSION}_linux_amd64.zip" | sha256sum -c -
 
 ADD https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v${PACKER_VSPHERE_BUILDER_VERSION}/packer-builder-vsphere-clone.linux ./
-RUN echo "${PACKER_VSPHERE_BUILDER_CLONE_SHA256} packer-builder-vsphere-clone.linux" | sha256sum -c - && mv packer-builder-vsphere-clone.linux /bin/packer-builder-vsphere-clone
+RUN echo "${PACKER_VSPHERE_BUILDER_CLONE_SHA256} packer-builder-vsphere-clone.linux" | sha256sum -c - && mv packer-builder-vsphere-clone.linux /bin/packer-builder-vsphere-clone && chmod 0755 /bin/packer-builder-vsphere-clone
 
 ADD https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v${PACKER_VSPHERE_BUILDER_VERSION}/packer-builder-vsphere-iso.linux ./
-RUN echo "${PACKER_VSPHERE_BUILDER_ISO_SHA256} packer-builder-vsphere-iso.linux" | sha256sum -c - && mv packer-builder-vsphere-iso.linux /bin/packer-builder-vsphere-iso
+RUN echo "${PACKER_VSPHERE_BUILDER_ISO_SHA256} packer-builder-vsphere-iso.linux" | sha256sum -c - && mv packer-builder-vsphere-iso.linux /bin/packer-builder-vsphere-iso && chmod 0755 /bin/packer-builder-vsphere-iso
 
 RUN unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /bin
 RUN rm -f packer_${PACKER_VERSION}_linux_amd64.zip
