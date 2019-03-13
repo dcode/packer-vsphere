@@ -9,7 +9,7 @@ ENV OVFTOOL_INSTALLER VMware-ovftool-${OVFTOOL_VERSION}-lin.x86_64.bundle
 ENV OVFTOOL_SHA256SUM=d327c8c7ebaac7432a589b1207410889d00c1ffd3fe18fa751b14459644de980
 
 # Needed to extract and install ovftool
-RUN dnf -y update && dnf -y install unzip ncurses-compat-libs && dnf clean all && rm -rf /var/cache/dnf
+RUN dnf -y update && dnf -y install unzip libnsl ncurses-compat-libs && dnf clean all && rm -rf /var/cache/dnf
 
 ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip ./
 RUN echo "${PACKER_SHA256SUM} packer_${PACKER_VERSION}_linux_amd64.zip" | sha256sum -c -
