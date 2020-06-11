@@ -35,4 +35,5 @@ RUN echo "${OVFTOOL_SHA256SUM} ${OVFTOOL_INSTALLER}" | sha256sum -c -
 RUN echo "/etc/init.d" | bash ${OVFTOOL_INSTALLER} -p /usr/local --console --eulas-agreed --required
 RUN rm ${OVFTOOL_INSTALLER}
 
+WORKDIR /project
 ENTRYPOINT ["/bin/packer"]
