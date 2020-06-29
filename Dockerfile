@@ -3,10 +3,6 @@ FROM fedora:32
 ENV PACKER_VERSION=1.6.0
 ENV PACKER_SHA256SUM=a678c995cb8dc232db3353881723793da5acc15857a807d96c52e96e671309d9
 
-ENV PACKER_VSPHERE_BUILDER_VERSION=2.3
-ENV PACKER_VSPHERE_BUILDER_CLONE_SHA256=6aea5b003bbdfbe8f7948dd6c905e224f8fe6b94ed9ccbf46917b01e1a0d8e70
-ENV PACKER_VSPHERE_BUILDER_ISO_SHA256=6e432cc39503ac6604564ba33aaf10d7debb6b6d20429b0af168a00bee342c3b
-
 ENV LC_CTYPE=C
 ENV OVFTOOL_VERSION 4.4.0-15722219
 ENV OVFTOOL_INSTALLER VMware-ovftool-${OVFTOOL_VERSION}-lin.x86_64.bundle
@@ -19,12 +15,6 @@ RUN dnf -y install unzip xerces-c libxcrypt-compat libnsl && dnf clean all && rm
 
 ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip ./
 RUN echo "${PACKER_SHA256SUM} packer_${PACKER_VERSION}_linux_amd64.zip" | sha256sum -c -
-
-ADD https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v${PACKER_VSPHERE_BUILDER_VERSION}/packer-builder-vsphere-clone.linux ./
-RUN echo "${PACKER_VSPHERE_BUILDER_CLONE_SHA256} packer-builder-vsphere-clone.linux" | sha256sum -c - && mv packer-builder-vsphere-clone.linux /bin/packer-builder-vsphere-clone && chmod 0755 /bin/packer-builder-vsphere-clone
-
-ADD https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v${PACKER_VSPHERE_BUILDER_VERSION}/packer-builder-vsphere-iso.linux ./
-RUN echo "${PACKER_VSPHERE_BUILDER_ISO_SHA256} packer-builder-vsphere-iso.linux" | sha256sum -c - && mv packer-builder-vsphere-iso.linux /bin/packer-builder-vsphere-iso && chmod 0755 /bin/packer-builder-vsphere-iso
 
 RUN unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /bin
 RUN rm -f packer_${PACKER_VERSION}_linux_amd64.zip
